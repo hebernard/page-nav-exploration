@@ -1,38 +1,209 @@
-.App {
-  text-align: center;
+html{
+/*cursor: url("./images/touch.svg") 25 15, auto;*/
 }
 
-.App-logo {
-  height: 40vmin;
+body{
+margin:0;
+font-family: sans-serif;
+}
+
+#frame{
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  background-image: url('./images/iphone-x.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#app-container{
+    width: 307px;
+    height: 665px;
+    margin-top: 50px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: -1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App{
+  height:inherit;
+}
+
+header{
+  background-color:white;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  height:60px;
+  padding-top: 23px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+}
+header svg{
+    width: 28px;
+    height: 28px;
+    margin: 15px 0 0 20px;
+}
+header .right-icons{
+  margin-right:10px;
 }
 
-.App-link {
-  color: #61dafb;
+section{
+  height: calc(100% - 214px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+img{
+  width:100%;
+  height:auto;
+  margin-top: 30px;
+}
+
+footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 2;
+}
+
+.location-container, .slide-container{
+  width:100%;
+}
+.location-container {
+  height: 80px;
+  background-color: white;
+  border-top: 1px solid grey;
+}
+
+.location-text{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.location-bar {
+  height: 2px;
+  width: 540px;
+  background-color: grey;
+  position: absolute;
+  top: 56px;
+  left: 156px;
+  display: flex;
+}
+
+.mark {
+  height: 17px;
+  width: 2px;
+  border: 2px;
+  background: grey;
+  position: relative;
+  top: -8px;
+}
+
+.mark.mark1{
+  left: 0px;
+}
+.mark.mark2{
+  left: 100px;
+}
+.mark.mark3{
+  left: 200px;
+}
+.mark.mark4{
+  left: 300px;
+}
+.mark.mark5{
+  left: 400px;
+}
+
+.slide-container {
+  height: 60px;
+  background-color: #DFDFDF;
+}
+
+.slide-container:before{
+  content:'';
+  display:block;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #DFDFDF;
+  position: absolute;
+  bottom: 60px;
+  left:48%;
+}
+
+.slide-container p{
+  position: absolute;
+  left: 47%;
+  font-size: 14px;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+.history{
+  padding:10px 8px;
+  background-color:#313131;
+  color:white;
+  font-size:12px;
+  position:absolute;
+  top:50%;
+  border-radius: 8px;
+  opacity: 0.8;
+  cursor:pointer;
+  /*cursor: url("./images/touch.svg") 25 15, auto;*/
+}
+
+.history:before{
+  content:'';
+  display:block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top:15px;
+}
+
+.history p{
+  margin:0;
+}
+
+.history.left{
+  left:12px;
+}
+
+.history.right{
+  right:12px;
+}
+
+.history.left:before{
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right:10px solid #313131;
+  left:-10px;
+}
+
+.history.right:before{
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #313131;
+  right:-10px;
+}
+
+.slide-container .MuiSlider-mark{
+  opacity: 1;
+  height: 6px;
+  width: 6px;
+  top: 11px;
+}
+
+.slide-container .MuiSlider-root{
+  /*cursor: url("./images/touch.svg") 25 15, auto;*/
 }
