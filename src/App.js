@@ -34,7 +34,7 @@ import { CSSTransition } from 'react-transition-group';
 const App = props => {
   const [ page, setPageState ] = React.useState(1);
   const [ chapter, setChapterState ] = React.useState(chapterNames[0]);
-  const [ inView, setInViewState ] = React.useState(false);
+  const [ inView, setInViewState ] = React.useState(true);
   const [ historyState, setHistoryState ] = React.useState({
     lastPage:1,
     lastSavedPage:1,
