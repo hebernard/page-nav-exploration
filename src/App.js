@@ -31,9 +31,10 @@ import { CSSTransition } from 'react-transition-group';
 ]
 
 
-const App = props => {
+const App = () => {
   const [ page, setPageState ] = React.useState(1);
   const [ chapter, setChapterState ] = React.useState(chapterNames[0]);
+  const [ lastChapter, setLastChapterState ] = React.useState(chapterNames[0]);
   const [ inView, setInViewState ] = React.useState(true);
   const [ historyState, setHistoryState ] = React.useState({
     lastPage:1,
@@ -48,6 +49,11 @@ const App = props => {
     let newLastPage = historyState.lastSavedPage
     let newHistoryObj = {lastPage: newLastPage, lastSavedPage: page, historyIsAvailable: true, historyDirection: newDirection};
     setHistoryState(newHistoryObj);
+    setLastChapterState(chapter)
+    chapterSwitch()
+  };
+
+  const chapterSwitch = () => {
     if(page === 1){setChapterState(chapterNames[0])}
     else if(page > 1 && page < 5){setChapterState(chapterNames[1])}
     else if(page > 4 && page < 8){setChapterState(chapterNames[2])}
@@ -70,15 +76,7 @@ const App = props => {
     else if(page > 44 && page < 48){setChapterState(chapterNames[19])}
     else if(page > 47 && page < 51){setChapterState(chapterNames[20])}
     else if(page >= 51 && page <= 55){setChapterState(chapterNames[21])}
-    // setTimeout(()=>{
-    //   setHistoryState(prevHistory => {
-    //   return {
-    //     ...prevHistory,
-    //     historyIsAvailable: false
-    //     }
-    //   })
-    // },6000)
-  };
+  }
 
   const handlePageChange = (event, pageCurrent) => {
     setPageState(pageCurrent);
@@ -176,7 +174,7 @@ const App = props => {
           timeout={300}
           classNames="history"
         >
-        <History isAvailable={historyState.historyIsAvailable} direction={historyState.historyDirection} prev={historyState.lastPage} prevSection={chapter} click={historyNav}/>
+        <History isAvailable={historyState.historyIsAvailable} direction={historyState.historyDirection} prev={historyState.lastPage} prevSection={lastChapter} click={historyNav}/>
         </CSSTransition>
         <img alt="page" src={url} onClick={handleShowHide}/>
       </section>
