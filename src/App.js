@@ -2,10 +2,39 @@ import React from 'react';
 import './App.css';
 import ContinuousSlider from "./ContinuousSlider";
 import History from "./History";
+import Drawer from "./Drawer";
+import { CSSTransition } from 'react-transition-group';
+
+ const chapterNames = [
+    '1. Functions',
+    '1.1 Review of Functions',
+    '1.2 Representing Functions',
+    '1.3 Trigonometric Functions',
+    '2. Limits',
+    '2.1 The Idea of Limits',
+    '2.2 Definitions of Limits',
+    '2.3 Techniques for Computing Limits',
+    '3. Derivatives',
+    '3.1 Introducing the Derivative',
+    '3.2 The Derivative as a Function',
+    '3.3 Rules of Differentiation',
+    '4. Applications of the Derivative',
+    '4.1 Maxima and Minima',
+    '4.2 Mean Value Theorem',
+    '4.3 What Derivatives Tell Us',
+    '5. Integration',
+    '5.1 Approximating Areas under Curves',
+    '5.2 Definite Integrals',
+   '5.3 Fundamental Theorem of Calculus',
+   '5.4 Working with Integrals',
+   '5.5 Substitution Rule',
+]
 
 
 const App = props => {
   const [ page, setPageState ] = React.useState(1);
+  const [ chapter, setChapterState ] = React.useState(chapterNames[0]);
+  const [ inView, setInViewState ] = React.useState(false);
   const [ historyState, setHistoryState ] = React.useState({
     lastPage:1,
     lastSavedPage:1,
@@ -19,9 +48,36 @@ const App = props => {
     let newLastPage = historyState.lastSavedPage
     let newHistoryObj = {lastPage: newLastPage, lastSavedPage: page, historyIsAvailable: true, historyDirection: newDirection};
     setHistoryState(newHistoryObj);
-    // setTimeout(()=>{
-    //   setHistoryState({historyIsAvailable: false, historyDirection: null});
-    // },3000)
+    if(page === 1){setChapterState(chapterNames[0])}
+    else if(page > 1 && page < 5){setChapterState(chapterNames[1])}
+    else if(page > 4 && page < 8){setChapterState(chapterNames[2])}
+    else if(page > 7 && page < 11){setChapterState(chapterNames[3])}
+    else if(page === 11){setChapterState(chapterNames[4])}
+    else if(page > 11 && page < 15){setChapterState(chapterNames[5])}
+    else if(page > 14 && page < 18){setChapterState(chapterNames[6])}
+    else if(page > 17 && page < 21){setChapterState(chapterNames[7])}
+    else if(page === 21){setChapterState(chapterNames[8])}
+    else if(page > 21 && page < 25){setChapterState(chapterNames[9])}
+    else if(page > 24 && page < 28){setChapterState(chapterNames[10])}
+    else if(page > 27 && page < 31){setChapterState(chapterNames[11])}
+    else if(page === 31){setChapterState(chapterNames[12])}
+    else if(page > 31 && page < 35){setChapterState(chapterNames[13])}
+    else if(page > 34 && page < 38){setChapterState(chapterNames[14])}
+    else if(page > 37 && page < 41){setChapterState(chapterNames[15])}
+    else if(page === 41){setChapterState(chapterNames[16])}
+    else if(page > 42 && page < 45){setChapterState(chapterNames[17])}
+    else if(page > 42 && page < 45){setChapterState(chapterNames[18])}
+    else if(page > 44 && page < 48){setChapterState(chapterNames[19])}
+    else if(page > 47 && page < 51){setChapterState(chapterNames[20])}
+    else if(page >= 51 && page <= 55){setChapterState(chapterNames[21])}
+    setTimeout(()=>{
+      setHistoryState(prevHistory => {
+      return {
+        ...prevHistory,
+        historyIsAvailable: false
+        }
+      })
+    },6000)
 
   };
 
@@ -45,16 +101,11 @@ const App = props => {
   return (
     <div className="App">
       <header>
-        <p>Test deploy</p>
         <div>
           <svg focusable="false" aria-hidden="true">
             <path xmlns="http://www.w3.org/2000/svg" d="M7.2642591,12.6772865 C6.90261436,12.2849891 6.91215906,11.6736274 7.29289322,11.2928932 L14.2928932,4.29289322 C14.6834175,3.90236893 15.3165825,3.90236893 15.7071068,4.29289322 C16.0976311,4.68341751 16.0976311,5.31658249 15.7071068,5.70710678 L9.41421356,12 L15.7071068,18.2928932 C16.0976311,18.6834175 16.0976311,19.3165825 15.7071068,19.7071068 C15.3165825,20.0976311 14.6834175,20.0976311 14.2928932,19.7071068 L7.29289322,12.7071068 C7.28297167,12.6971852 7.27343586,12.6872407 7.2642591,12.6772865 Z" fillRule="nonzero"/>
           </svg>
-          <svg focusable="false" aria-hidden="true">
-            <rect x="4" y="6" width="16" height="2" rx="1"/>
-            <rect x="4" y="11" width="16" height="2" rx="1"/>
-            <rect x="4" y="16" width="16" height="2" rx="1"/>
-          </svg>
+          <Drawer toc={chapterNames}></Drawer>
         </div>
         <div className="right-icons">
           <svg focusable="false" aria-hidden="true">
@@ -69,13 +120,19 @@ const App = props => {
         </div>
       </header>
       <section>
-        <History isAvailable={historyState.historyIsAvailable} direction={historyState.historyDirection} prev={historyState.lastPage} click={historyNav}/>
+        <CSSTransition
+          in={historyState.historyIsAvailable}
+          timeout={300}
+          classNames="history"
+        >
+        <History isAvailable={historyState.historyIsAvailable} direction={historyState.historyDirection} prev={historyState.lastPage} prevSection={chapter} click={historyNav}/>
+        </CSSTransition>
         <img alt="page" src={url}/>
       </section>
       <footer>
         <div className="location-container">
           <div className="location-text">
-            <p>1.1 Section Name</p>
+            <p>{chapter}</p>
             <p>{page} of 55</p>
           </div>
           <div className="location-bar" style={{left: left + 'px'}}>

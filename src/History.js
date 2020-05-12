@@ -6,7 +6,7 @@ const History = props => {
     return(
         <div className={'history ' + props.direction} onClick={props.click}>
           <p>Back to pg {props.prev}</p>
-          <p>Section 1.1</p>
+          <p>{props.prevSection}</p>
         </div>
     );
   }

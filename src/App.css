@@ -20,6 +20,7 @@ font-family: sans-serif;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1400;
 }
 
 #app-container{
@@ -31,7 +32,7 @@ font-family: sans-serif;
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    z-index: -1;
+    z-index: 1;
 }
 
 .App{
@@ -47,7 +48,11 @@ header{
   display: flex;
   justify-content: space-between;
 }
-header svg{
+header div{
+  display: flex;
+  align-items: center;
+}
+header svg, .MuiButtonBase-root.menuBtn svg{
     width: 28px;
     height: 28px;
     margin: 15px 0 0 20px;
@@ -60,7 +65,7 @@ section{
   height: calc(100% - 214px);
 }
 
-img{
+section img{
   width:100%;
   height:auto;
   margin-top: 30px;
@@ -86,6 +91,14 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
+  font-size:13px;
+}
+
+.location-text p:first-child{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width:210px;
 }
 
 .location-bar {
@@ -111,16 +124,16 @@ footer {
   left: 0px;
 }
 .mark.mark2{
-  left: 100px;
+  left: 98px;
 }
 .mark.mark3{
-  left: 200px;
+  left: 196px;
 }
 .mark.mark4{
-  left: 300px;
+  left: 293px;
 }
 .mark.mark5{
-  left: 400px;
+  left: 392px;
 }
 
 .slide-container {
@@ -197,6 +210,29 @@ footer {
   right:-10px;
 }
 
+.history.left.history-enter {
+  left: -88px;
+}
+.history.left.history-enter-active {
+  left: 12px;
+  transition: all 200ms ease;
+}
+
+.history.right.history-enter {
+  right: -98px;
+}
+.history.right.history-enter-active {
+  right:12px;
+  transition: all 200ms ease;
+}
+/*.history-exit {*/
+/*  opacity: 1;*/
+/*}*/
+/*.history-exit-active {*/
+/*  opacity: 0;*/
+/*  transition: opacity 200ms;*/
+/*}*/
+
 .slide-container .MuiSlider-mark{
   opacity: 1;
   height: 6px;
@@ -206,4 +242,60 @@ footer {
 
 .slide-container .MuiSlider-root{
   /*cursor: url("./images/touch.svg") 25 15, auto;*/
+}
+
+.MuiButtonBase-root.menuBtn{
+  padding: 3px 0 0 2px;
+  margin-top: 10px;
+  margin-left: 10px;
+  min-width:28px;
+}
+
+.MuiButtonBase-root.menuBtn svg{
+  margin:0;
+}
+
+.MuiDrawer-root .MuiDrawer-modal{
+  bottom:51px;
+}
+
+.MuiDrawer-modal .MuiBackdrop-root{
+  width: 308px;
+  margin: 0 auto;
+  margin-top: 50px;
+  height: 450px;
+  border-radius: 34px 34px 0 0;
+  z-index: 2;
+}
+
+.MuiDrawer-modal .MuiDrawer-paper{
+  width: 306px;
+  margin:0 auto;
+  margin-bottom: 51px;
+  border-radius: 12px 12px 34px 34px;
+  z-index: 3;
+}
+
+.book-card{
+  display: flex;
+  padding: 20px;
+}
+
+.book-card img{
+  height: 100px;
+}
+
+.book-card p{
+  margin-left:20px;
+}
+
+.toc{
+  list-style-type:none;
+  padding-inline-start: 20px;
+  overflow: scroll;
+  height: 390px;
+}
+
+.toc li{
+  margin: 20px 0;
 }
