@@ -50,10 +50,10 @@ const App = () => {
     let newHistoryObj = {lastPage: newLastPage, lastSavedPage: page, historyIsAvailable: true, historyDirection: newDirection};
     setHistoryState(newHistoryObj);
     setLastChapterState(chapter)
-    chapterSwitch()
+    chapterSwitch(page)
   };
 
-  const chapterSwitch = () => {
+  const chapterSwitch = (page) => {
     if(page === 1){setChapterState(chapterNames[0])}
     else if(page > 1 && page < 5){setChapterState(chapterNames[1])}
     else if(page > 4 && page < 8){setChapterState(chapterNames[2])}
@@ -83,6 +83,7 @@ const App = () => {
   };
 
   const historyNav = () => {
+    chapterSwitch(historyState.lastPage)
     setPageState(historyState.lastPage)
     let newPage = historyState.lastPage
     let newDirection;
@@ -90,6 +91,7 @@ const App = () => {
     let newLastPage = historyState.lastSavedPage
     let newHistoryObj = {lastPage: newLastPage, lastSavedPage: newPage, historyIsAvailable: true, historyDirection: newDirection};
     setHistoryState(newHistoryObj);
+    setLastChapterState(chapter)
   }
 
   const handleShowHide = () => {
