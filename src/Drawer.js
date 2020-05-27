@@ -12,7 +12,7 @@ export default function TemporaryDrawer(props) {
   });
 
   const listItems = props.toc.map((chapter) =>
-    <li>{chapter}</li>
+    <li key={chapter}>{chapter}</li>
   );
 
   const toggleDrawer = (anchor, open) => (event) => {

@@ -5,7 +5,6 @@ font-family: sans-serif;
 
 header{
   background-color:white;
-  border-bottom: 1px solid grey;
   width: 100%;
   height:60px;
   padding-top: 23px;
@@ -13,6 +12,8 @@ header{
   justify-content: space-between;
   top: 0;
   z-index: 2;
+  position: absolute;
+  box-shadow: 0 7px 8px #ECECEC;
 }
 header div{
   display: flex;
@@ -27,9 +28,14 @@ header .right-icons{
   margin-right:10px;
 }
 
+section{
+  height: 100vh;
+  background-color: #F1F1F1;
+}
+
 section img{
   width:100%;
-  height:auto;
+  margin-top: 121px;
 }
 
 section img.fullsize{
@@ -39,12 +45,13 @@ section img.fullsize{
 
 footer {
   width: 100%;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   z-index: 2;
   height:60px;
   display: flex;
-  border-top: 1px solid grey;
+  background-color: white;
+  box-shadow: 0 -7px 8px #ECECEC;
 }
 
 .location-container, .slide-container{
@@ -70,7 +77,7 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width:210px;
+  width: 270px;
 }
 
 .location-text p:last-child{
@@ -139,19 +146,6 @@ footer form input:focus {
   background-color: white;
 }
 
-/*.slide-container:before{*/
-/*  content:'';*/
-/*  display:block;*/
-/*  width: 0;*/
-/*  height: 0;*/
-/*  border-left: 10px solid transparent;*/
-/*  border-right: 10px solid transparent;*/
-/*  border-bottom: 10px solid #DFDFDF;*/
-/*  position: absolute;*/
-/*  bottom: 60px;*/
-/*  left:48%;*/
-/*}*/
-
 .slide-container p{
   position: absolute;
   left: 47%;
@@ -184,15 +178,16 @@ footer form input:focus {
 
 .history{
   padding:10px 8px;
-  background-color:#313131;
+  background-color:#003860;
   color:white;
-  font-size:12px;
+  font-size:14px;
   position:absolute;
-  top:50%;
+  top: 140px;
   border-radius: 8px;
-  opacity: 0.8;
   cursor:pointer;
   z-index: 100;
+  display: flex;
+  align-items: center;
 }
 
 .history:before{
@@ -201,11 +196,32 @@ footer form input:focus {
   width: 0;
   height: 0;
   position: absolute;
-  top:15px;
+  top:9px;
+}
+
+.history img{
+  width:18px;
+  height:18px;
+  margin-right: 4px;
 }
 
 .history p{
   margin:0;
+  padding-bottom: 2px;
+}
+
+.history.left:before{
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right:10px solid #003860;
+  left:-9px;
+}
+
+.history.right:before{
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #003860;
+  right:-9px;
 }
 
 .history.left{
@@ -216,27 +232,29 @@ footer form input:focus {
   right:12px;
 }
 
-.history.left:before{
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right:10px solid #313131;
-  left:-10px;
-}
-
-.history.right:before{
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid #313131;
-  right:-10px;
-}
 
 .history.left.history-enter {
-  left: -88px;
+  left: -90px;
 }
 .history.left.history-enter-active {
   left: 12px;
   transition: all 200ms ease;
 }
+.history.left.history-enter-done{
+  left:12px;
+}
+.history.left.history-exit {
+  left: 12px;
+}
+.history.left.history-exit-active {
+  left: -90px;
+  transition: all 200ms ease;
+}
+.history.left.history-exit-done{
+  left:-90px;
+}
+
+
 
 .history.right.history-enter {
   right: -98px;
@@ -244,6 +262,19 @@ footer form input:focus {
 .history.right.history-enter-active {
   right:12px;
   transition: all 200ms ease;
+}
+.history.right.history-enter-done{
+  right:12px;
+}
+.history.right.history-exit {
+  right: 12px;
+}
+.history.right.history-exit-active {
+  right: -98px;
+  transition: all 200ms ease;
+}
+.history.right.history-exit-done{
+  right:-98px;
 }
 
 
@@ -258,7 +289,28 @@ footer form input:focus {
   color:white;
 }
 
-.book-popup:before{
+.book-popup-enter {
+  bottom:-80px
+}
+.book-popup-enter-active {
+  bottom: 80px;
+  transition: all 200ms ease;
+}
+.book-popup-enter-done{
+  bottom: 80px;
+}
+.book-popup-exit {
+  bottom: 80px;
+}
+.book-popup-exit-active {
+  bottom:-80px;
+  transition: all 400ms ease-out;
+}
+.book-popup-exit-done{
+  bottom:-80px
+}
+
+.arrow{
   content:'';
   display:block;
   width: 0;
@@ -268,7 +320,33 @@ footer form input:focus {
   border-top: 10px solid #003860;
   position: absolute;
   bottom: -9px;
-  left:48%;
+  margin-left: 43px;
+}
+
+.page-row-container{
+  overflow: hidden;
+}
+
+.page-row{
+  list-style-type:none;
+  display: flex;
+  position: relative;
+  left: 13px;
+  padding-inline-start: 0px;
+  margin-left: 46%;
+  margin-top: 8px;
+}
+
+.page-row li{
+  margin-right: 2px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  height: 16px;
+  width:10px;
+}
+
+.page-row li.active{
+  border: 2px solid white;
 }
 
 
