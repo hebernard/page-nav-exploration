@@ -43,7 +43,13 @@ const App = () => {
     historyDirection: null,
   });
 
-  const handlePageCommit= () => {
+  const left = 200 - (page * 10);
+  const url = `https://pearsonux.sfo2.digitaloceanspaces.com/sample_pdf/${page}.png`;
+  let touchXStart = 0;
+  let touchXEnd = 0;
+
+
+  const handlePageCommit = () => {
     let newDirection;
     page > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
     let newLastPage = historyState.lastSavedPage
@@ -51,6 +57,8 @@ const App = () => {
     setHistoryState(newHistoryObj);
     setLastChapterState(chapter)
     chapterSwitch(page)
+    let textInput = document.querySelector('input[type="text"]')
+    textInput.value = page
   };
 
   const chapterSwitch = (page) => {
@@ -82,6 +90,30 @@ const App = () => {
     setPageState(pageCurrent);
   };
 
+  const handleEnableInput = (event) => {
+    event.target.removeAttribute('value');
+  };
+
+  const handleDisableInput = (event) => {
+    event.target.setAttribute('value', page);
+    event.target.value = page
+  };
+
+  const handleInput = (event) => {
+    event.preventDefault()
+    const input = event.target.children[0]
+    if(input.value >= 1){
+        setPageState(input.value)
+        let newDirection;
+        input.value > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
+        let newLastPage = historyState.lastSavedPage
+        let newHistoryObj = {lastPage: newLastPage, lastSavedPage: input.value, historyIsAvailable: true, historyDirection: newDirection};
+        setHistoryState(newHistoryObj);
+        setLastChapterState(chapter)
+        chapterSwitch(input.value)
+    }
+  };
+
   const historyNav = () => {
     chapterSwitch(historyState.lastPage)
     setPageState(historyState.lastPage)
@@ -92,7 +124,7 @@ const App = () => {
     let newHistoryObj = {lastPage: newLastPage, lastSavedPage: newPage, historyIsAvailable: true, historyDirection: newDirection};
     setHistoryState(newHistoryObj);
     setLastChapterState(chapter)
-  }
+  };
 
   const handleShowHide = () => {
     let newInView = !inView
@@ -105,6 +137,39 @@ const App = () => {
         }
       })
     }
+    const pageImg = document.querySelector('section img')
+    pageImg.classList.contains('fullsize') ? pageImg.classList.remove('fullsize') : pageImg.classList.add('fullsize')
+  };
+
+  const handleTouchPage = (event) => {
+    touchXStart = event.targetTouches[0].pageX
+  }
+
+  const handleSwipePage = (event) => {
+    touchXEnd = event.targetTouches[0].pageX
+  }
+
+  const handleTouchPageEnd = (event) => {
+      if(touchXEnd > 0){
+        console.log(touchXStart)
+        console.log(touchXEnd)
+        let newLastPage = page;
+        let newPage;
+        if(touchXEnd > touchXStart){
+            newPage = page - 1
+        }else{
+            newPage = page + 1
+        }
+        let newDirection;
+        newPage > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
+        let newHistoryObj = {lastPage: newLastPage, lastSavedPage: newPage, historyIsAvailable: true, historyDirection: newDirection};
+        chapterSwitch(newPage)
+        setPageState(newPage)
+        setHistoryState(newHistoryObj);
+        setLastChapterState(chapter)
+        let textInput = document.querySelector('input[type="text"]')
+        textInput.value = newPage
+      }
   }
 
   const renderHeader = () => {
@@ -133,27 +198,16 @@ const App = () => {
       } else{
         return null
       }
-  }
+  };
 
   const renderFooter = () => {
     if(inView === true){
         return (
            <footer>
-            <div className="location-container">
-              <div className="location-text">
-                <p>{chapter}</p>
-                <p>{page} of 55</p>
-              </div>
-              <div className="location-bar" style={{left: left + 'px'}}>
-                <div className="mark mark1"></div>
-                <div className="mark mark2"></div>
-                <div className="mark mark3"></div>
-                <div className="mark mark4"></div>
-                <div className="mark mark5"></div>
-              </div>
-            </div>
+            <form onSubmit={handleInput}>
+                <input type="text" defaultValue={page} onFocus={handleEnableInput} onBlur={handleDisableInput}/>
+            </form>
             <div className="slide-container">
-              <p><span>{Math.round((page * 100) / 55)}</span>%</p>
               <ContinuousSlider change={handlePageChange} commit={handlePageCommit} value={page} history={historyState.lastPage}></ContinuousSlider>
             </div>
           </footer>
@@ -161,11 +215,18 @@ const App = () => {
       } else{
         return null
       }
+  };
+
+  const renderbookPopUp = () => {
+      return (
+          <div className="book-popup">
+              <div className="location-text">
+              <p>{chapter}</p>
+              <p><span>{Math.round((page * 100) / 55)}</span>% complete</p>
+              </div>
+          </div>
+    )
   }
-
-
-  const left = 166 - (page * 10);
-  const url = `https://pearsonux.sfo2.digitaloceanspaces.com/sample_pdf/${page}.png`
 
   return (
     <div className="App">
@@ -176,13 +237,14 @@ const App = () => {
           timeout={300}
           classNames="history"
         >
-        <History isAvailable={historyState.historyIsAvailable} direction={historyState.historyDirection} prev={historyState.lastPage} prevSection={lastChapter} click={historyNav}/>
+        <History isAvailable={historyState.historyIsAvailable} direction={historyState.historyDirection} prev={historyState.lastPage} prevSection={lastChapter} click={historyNav} />
         </CSSTransition>
-        <img alt="page" src={url} onClick={handleShowHide}/>
+        <img alt="page" src={url} onClick={handleShowHide} onTouchStart={handleTouchPage} onTouchMove={handleSwipePage} onTouchEnd={handleTouchPageEnd}/>
       </section>
+      {renderbookPopUp()}
       {renderFooter()}
     </div>
   );
-}
+};
 
 export default App;
