@@ -1,10 +1,9 @@
 import React from 'react';
 import './App.css';
 import Header from "./Header";
-import ContinuousSlider from "./ContinuousSlider";
+import Footer from "./Footer";
 import History from "./History";
 import BookPopUp from "./BookPopUp";
-import Drawer from "./Drawer";
 import { CSSTransition } from 'react-transition-group';
 
 const chapterNames = [
@@ -47,14 +46,16 @@ const App = () => {
   });
 
   const url = `https://pearsonux.sfo2.digitaloceanspaces.com/sample_pdf/${page}.png`;
+
   let touchXStart = 0;
   let touchXEnd = 0;
 
   let touchHistoryXStart = 0;
   let touchHistoryXEnd = 0;
 
+  let timeout = null;
 
-  const handlePageCommit = () => {
+  const handlePageCommit = (event) => {
     let newDirection;
     page > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
     let newLastPage = historyState.lastSavedPage
@@ -102,26 +103,34 @@ const App = () => {
 
   const handleEnableInput = (event) => {
     event.target.removeAttribute('value');
+    event.target.value = null;
   };
 
   const handleDisableInput = (event) => {
     event.target.setAttribute('value', page);
     event.target.value = page
+    window.scrollTo({top: 0, left: 0});
   };
 
   const handleInput = (event) => {
     event.preventDefault()
-    const input = event.target.children[0]
-    if(input.value >= 1){
-        setPageState(input.value)
-        let newDirection;
-        input.value > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
-        let newLastPage = historyState.lastSavedPage
-        let newHistoryObj = {lastPage: newLastPage, lastSavedPage: input.value, historyIsAvailable: true, historyDirection: newDirection};
-        setHistoryState(newHistoryObj);
-        setLastChapterState(chapter)
-        chapterSwitch(input.value)
-    }
+    event.persist()
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        console.log(event.target)
+        const input = event.target
+        let value = parseInt(input.value)
+        if(value >= 1 && value <= 55){
+            setPageState(value)
+            let newDirection;
+            value > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
+            let newLastPage = historyState.lastSavedPage
+            let newHistoryObj = {lastPage: newLastPage, lastSavedPage: value, historyIsAvailable: true, historyDirection: newDirection};
+            setHistoryState(newHistoryObj);
+            setLastChapterState(chapter)
+            chapterSwitch(value)
+        }
+    }, 1000);
   };
 
   const historyNav = () => {
@@ -183,7 +192,6 @@ const App = () => {
   };
 
   const handleHistorySwipeStart = (event) => {
-    console.log(event)
     touchHistoryXStart = event.targetTouches[0].pageX
   };
 
@@ -192,27 +200,9 @@ const App = () => {
   };
 
   const handleHistorySwipeEnd = (event) => {
-    console.log(touchHistoryXEnd)
     if(touchHistoryXEnd > 0){
         setHistoryState({...historyState, historyIsAvailable: false})
     }
-  };
-
-  const renderFooter = () => {
-    if(inView === true){
-        return (
-           <footer>
-            <form onSubmit={handleInput}>
-                <input type="number" pattern="[0-9]*" inputMode="numeric" defaultValue={page} onFocus={handleEnableInput} onBlur={handleDisableInput}/>
-            </form>
-            <div className="slide-container">
-              <ContinuousSlider change={handlePageChange} commit={handlePageCommit} value={page} history={historyState.lastPage}></ContinuousSlider>
-            </div>
-          </footer>
-        )
-      } else{
-        return null
-      }
   };
 
   return (
@@ -237,7 +227,7 @@ const App = () => {
       <section>
         <img alt="page" src={url} onClick={handleShowHide} onTouchStart={handleTouchPage} onTouchMove={handleSwipePage} onTouchEnd={handleTouchPageEnd}/>
       </section>
-      {renderFooter()}
+      <Footer onfocus={handleEnableInput} onblur={handleDisableInput} submit={handleInput} change={handlePageChange} commit={handlePageCommit} page={page} history={historyState.lastPage} ></Footer>
     </div>
   );
 };
