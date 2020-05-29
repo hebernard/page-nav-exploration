@@ -62,7 +62,7 @@ const App = () => {
     setHistoryState(newHistoryObj);
     setLastChapterState(chapter)
     chapterSwitch(page)
-    let textInput = document.querySelector('input[type="text"]')
+    let textInput = document.querySelector('input[type="number"]')
     textInput.value = page
     setShowBookPopUp(false)
   };
@@ -94,6 +94,9 @@ const App = () => {
 
   const handlePageChange = (event, pageCurrent) => {
     setPageState(pageCurrent);
+    chapterSwitch(page);
+    let textInput = document.querySelector('input[type="number"]')
+    textInput.value = page
     setShowBookPopUp(true)
   };
 
@@ -125,6 +128,8 @@ const App = () => {
     chapterSwitch(historyState.lastPage)
     setPageState(historyState.lastPage)
     let newPage = historyState.lastPage
+    let textInput = document.querySelector('input[type="number"]')
+    textInput.value = newPage
     let newDirection;
     newPage > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
     let newLastPage = historyState.lastSavedPage
@@ -172,7 +177,7 @@ const App = () => {
         setPageState(newPage)
         setHistoryState(newHistoryObj);
         setLastChapterState(chapter)
-        let textInput = document.querySelector('input[type="text"]')
+        let textInput = document.querySelector('input[type="number"]')
         textInput.value = newPage
       }
   };
@@ -198,7 +203,7 @@ const App = () => {
         return (
            <footer>
             <form onSubmit={handleInput}>
-                <input type="text" defaultValue={page} onFocus={handleEnableInput} onBlur={handleDisableInput}/>
+                <input type="number" pattern="[0-9]*" inputMode="numeric" defaultValue={page} onFocus={handleEnableInput} onBlur={handleDisableInput}/>
             </form>
             <div className="slide-container">
               <ContinuousSlider change={handlePageChange} commit={handlePageCommit} value={page} history={historyState.lastPage}></ContinuousSlider>

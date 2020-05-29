@@ -10,7 +10,7 @@ const BookPopUp = props => {
   const pageList = [];
   for(var i = 1; i < 56; i++){
      let image;
-     if(String(i).substr(-1) == 0 || i === 1){
+     if(i === 1 || i === 11 || i === 21 || i === 31 || i === 41){
         image = chapterSvg
       } else if(i === 4 || i === 22 || i === 35){
         image = bookmarkSvg
