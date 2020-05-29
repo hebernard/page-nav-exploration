@@ -227,7 +227,7 @@ const App = () => {
       <section>
         <img alt="page" src={url} onClick={handleShowHide} onTouchStart={handleTouchPage} onTouchMove={handleSwipePage} onTouchEnd={handleTouchPageEnd}/>
       </section>
-      <Footer onfocus={handleEnableInput} onblur={handleDisableInput} submit={handleInput} change={handlePageChange} commit={handlePageCommit} page={page} history={historyState.lastPage} ></Footer>
+      <Footer isAvailable={inView} onfocus={handleEnableInput} onblur={handleDisableInput} submit={handleInput} change={handlePageChange} commit={handlePageCommit} page={page} history={historyState.lastPage} ></Footer>
     </div>
   );
 };
