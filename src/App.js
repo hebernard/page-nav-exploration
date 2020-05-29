@@ -55,6 +55,8 @@ const App = () => {
 
   let timeout = null;
 
+  let vh = (window.innerHeight * 0.01) * 100;
+
   const handlePageCommit = (event) => {
     let newDirection;
     page > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
@@ -237,7 +239,7 @@ const App = () => {
         >
             <BookPopUp chapter={chapter} page={page}></BookPopUp>
         </CSSTransition>
-      <section>
+      <section style={{height: `${vh}px`}}>
         <img alt="page" src={url} onClick={handleShowHide} onTouchStart={handleTouchPage} onTouchMove={handleSwipePage} onTouchEnd={handleTouchPageEnd}/>
       </section>
       <Footer isAvailable={inView} onfocus={handleEnableInput} onblur={handleDisableInput} submit={handleInput} change={handlePageChange} commit={handlePageCommit} page={page} history={historyState.lastPage} ></Footer>
