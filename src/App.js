@@ -171,23 +171,36 @@ const App = () => {
   }
 
   const handleTouchPageEnd = (event) => {
-      if(touchXEnd > 0){
-        let newLastPage = page;
-        let newPage;
-        if(touchXEnd > touchXStart){
-            newPage = page - 1
-        }else{
-            newPage = page + 1
-        }
-        let newDirection;
-        newPage > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
-        let newHistoryObj = {lastPage: newLastPage, lastSavedPage: newPage, historyIsAvailable: false, historyDirection: newDirection};
-        chapterSwitch(newPage)
-        setPageState(newPage)
-        setHistoryState(newHistoryObj);
-        setLastChapterState(chapter)
-        let textInput = document.querySelector('input[type="number"]')
-        textInput.value = newPage
+      if(touchXEnd > 0) {
+          let newLastPage = page;
+          let newPage;
+          if (touchXEnd > touchXStart) {
+                if(page != 1) {
+                    newPage = page - 1
+                }else{
+                    newPage = page
+                }
+          } else {
+              if(page != 55) {
+                  newPage = page + 1
+              }else{
+                    newPage = page
+                }
+          }
+          let newDirection;
+          newPage > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
+          let newHistoryObj = {
+              lastPage: newLastPage,
+              lastSavedPage: newPage,
+              historyIsAvailable: false,
+              historyDirection: newDirection
+          };
+          chapterSwitch(newPage)
+          setPageState(newPage)
+          setHistoryState(newHistoryObj);
+          setLastChapterState(chapter)
+          let textInput = document.querySelector('input[type="number"]')
+          textInput.value = newPage
       }
   };
 
