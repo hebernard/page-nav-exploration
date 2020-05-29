@@ -119,8 +119,8 @@ const App = () => {
     event.persist()
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-        console.log(event.target)
-        const input = event.target
+        console.log(event.target.children[0])
+        let input = event.type == 'submit' ? event.target.children[0] : event.target;
         let value = parseInt(input.value)
         if(value >= 1 && value <= 55){
             setPageState(value)
