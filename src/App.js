@@ -117,22 +117,30 @@ const App = () => {
   const handleInput = (event) => {
     event.preventDefault()
     event.persist()
+    let input = event.type == 'submit' ? event.target.children[0] : event.target;
+    let value = parseInt(input.value)
+    if(value >= 1 && value <= 55) {
+        setPageState(value)
+        let newDirection;
+        value > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
+        let newLastPage = historyState.lastSavedPage
+        let newHistoryObj = {
+            lastPage: newLastPage,
+            lastSavedPage: value,
+            historyIsAvailable: true,
+            historyDirection: newDirection
+        };
+        setHistoryState(newHistoryObj);
+        setLastChapterState(chapter)
+        chapterSwitch(value)
+    }
+  };
+
+  const handleTimout = (event) => {
+    event.preventDefault()
+    event.persist()
     clearTimeout(timeout);
-    timeout = setTimeout(() => {
-        console.log(event.target.children[0])
-        let input = event.type == 'submit' ? event.target.children[0] : event.target;
-        let value = parseInt(input.value)
-        if(value >= 1 && value <= 55){
-            setPageState(value)
-            let newDirection;
-            value > historyState.lastSavedPage ? newDirection = 'left' : newDirection = 'right';
-            let newLastPage = historyState.lastSavedPage
-            let newHistoryObj = {lastPage: newLastPage, lastSavedPage: value, historyIsAvailable: true, historyDirection: newDirection};
-            setHistoryState(newHistoryObj);
-            setLastChapterState(chapter)
-            chapterSwitch(value)
-        }
-    }, 1000);
+    timeout = setTimeout( handleInput, 1000)
   };
 
   const historyNav = () => {
@@ -242,7 +250,7 @@ const App = () => {
       <section style={{height: `${vh}px`}}>
         <img alt="page" src={url} onClick={handleShowHide} onTouchStart={handleTouchPage} onTouchMove={handleSwipePage} onTouchEnd={handleTouchPageEnd}/>
       </section>
-      <Footer isAvailable={inView} onfocus={handleEnableInput} onblur={handleDisableInput} submit={handleInput} change={handlePageChange} commit={handlePageCommit} page={page} history={historyState.lastPage} ></Footer>
+      <Footer isAvailable={inView} onfocus={handleEnableInput} onblur={handleDisableInput} submit={handleInput} timeout={handleTimout} change={handlePageChange} commit={handlePageCommit} page={page} history={historyState.lastPage} ></Footer>
     </div>
   );
 };
