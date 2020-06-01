@@ -15,7 +15,7 @@ const Footer = props => {
     if (props.isAvailable) {
         return (
             <footer>
-                <input type="number" min={1} max={55} defaultValue={props.page}
+                <input type="number" inputMode="numeric" min={1} max={55} defaultValue={props.page}
                       onKeyPress={handleKeyPress}/>
                 <div className="slide-container">
                     <ContinuousSlider change={props.change} commit={props.commit} value={props.page}
