@@ -115,6 +115,7 @@ const App = () => {
   };
 
   const handleInput = (event) => {
+    let savedHeight = vh;
     event.preventDefault()
     event.persist()
     let input = event.target
@@ -135,6 +136,7 @@ const App = () => {
         chapterSwitch(value)
         window.scrollTo({top: 0, left: 0});
         input.blur();
+        vh = savedHeight;
     }
   };
 
