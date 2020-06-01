@@ -118,9 +118,9 @@ const App = () => {
     event.preventDefault()
     event.persist()
     console.log(event)
-    console.log('this at least happens')
-    let input = event.type == 'submit' ? event.target.children[0] : event.target;
+    let input = document.querySelector('input[type="number"]')
     let value = parseInt(input.value)
+    console.log(input + ',' + value)
     if(value >= 1 && value <= 55) {
         setPageState(value)
         let newDirection;
