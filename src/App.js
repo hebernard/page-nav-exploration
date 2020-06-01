@@ -160,7 +160,6 @@ const App = () => {
   };
 
   const handleShowHide = () => {
-    console.log('test another function')
     let newInView = !inView
     setInViewState(newInView);
     if(historyState.historyIsAvailable === true){
