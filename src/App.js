@@ -138,7 +138,7 @@ const App = () => {
         window.scrollTo({top: 0, left: 0});
         input.blur();
         vh = savedHeight;
-        console.log(vh)
+        document.querySelector('section').style.height = vh + 'px'
     }
   };
 
