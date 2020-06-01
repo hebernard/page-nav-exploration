@@ -117,7 +117,7 @@ const App = () => {
   const handleInput = (event) => {
     event.preventDefault()
     event.persist()
-    console.log(event)
+    document.querySelector('.temporary').innerText = event.type;
     let input = event.type == 'submit' ? event.target.children[0] : event.target;
     let value = parseInt(input.value)
     if(value >= 1 && value <= 55) {
@@ -249,6 +249,7 @@ const App = () => {
             <BookPopUp chapter={chapter} page={page}></BookPopUp>
         </CSSTransition>
       <section style={{height: `${vh}px`}}>
+        <div className='temporary'></div>
         <img alt="page" src={url} onClick={handleShowHide} onTouchStart={handleTouchPage} onTouchMove={handleSwipePage} onTouchEnd={handleTouchPageEnd}/>
       </section>
       <Footer isAvailable={inView} onfocus={handleEnableInput} onblur={handleDisableInput} submit={handleInput} timeout={handleTimout} change={handlePageChange} commit={handlePageCommit} page={page} history={historyState.lastPage} ></Footer>

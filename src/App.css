@@ -45,6 +45,7 @@ section{
 section img{
   width:100%;
   margin-top: 121px;
+  display:none;
 }
 
 section img.fullsize{
@@ -113,6 +114,11 @@ footer input{
 
 footer input:focus {
   outline: #879CAB auto 5px;
+}
+
+.temporary{
+  position: absolute;
+  top: 91px;
 }
 
 .location-bar {
