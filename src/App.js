@@ -135,9 +135,12 @@ const App = () => {
         setLastChapterState(chapter)
         chapterSwitch(value)
         window.scrollTo({top: 0, left: 0});
-        setTimeout(()=>{input.blur();},300)
+        setTimeout(()=>{
+            input.blur();
+            document.querySelector('section').style.height= `${savedHeight}px`
+            console.log(savedHeight)
+        },300)
         vh = savedHeight;
-        document.querySelector('section').style.height= `${savedHeight}px`
     }
   };
 
