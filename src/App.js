@@ -117,7 +117,6 @@ const App = () => {
   const handleInput = (event) => {
     event.preventDefault()
     event.persist()
-    console.log('handle input')
     let input = event.target
     let value = parseInt(input.value)
     if(value >= 1 && value <= 55) {
