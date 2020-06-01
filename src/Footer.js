@@ -8,7 +8,6 @@ const Footer = props => {
                 <form onSubmit={props.submit}>
                     <input type="number" pattern="[0-9]*" inputMode="numeric" min={1} max={55} defaultValue={props.page}
                            onFocus={props.onfocus} onBlur={props.onblur}/>
-                    <button type="submit" style={{visibility:'hidden', position: 'absolute'}}></button>
                 </form>
                 <div className="slide-container">
                     <ContinuousSlider change={props.change} commit={props.commit} value={props.page}

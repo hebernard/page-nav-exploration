@@ -117,6 +117,7 @@ const App = () => {
   const handleInput = (event) => {
     event.preventDefault()
     event.persist()
+    console.log(event)
     let input = event.type == 'submit' ? event.target.children[0] : event.target;
     let value = parseInt(input.value)
     if(value >= 1 && value <= 55) {
