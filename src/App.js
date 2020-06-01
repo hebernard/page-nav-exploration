@@ -118,6 +118,7 @@ const App = () => {
     event.preventDefault()
     event.persist()
     console.log(event)
+    console.log('this at least happens')
     let input = event.type == 'submit' ? event.target.children[0] : event.target;
     let value = parseInt(input.value)
     if(value >= 1 && value <= 55) {
