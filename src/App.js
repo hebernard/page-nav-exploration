@@ -134,6 +134,7 @@ const App = () => {
         setLastChapterState(chapter)
         chapterSwitch(value)
         window.scrollTo({top: 0, left: 0});
+        input.blur();
     }
   };
 
