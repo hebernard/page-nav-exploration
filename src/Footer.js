@@ -6,6 +6,7 @@ const Footer = props => {
     const handleKeyPress = (event) => {
         // event.preventDefault()
         // event.persist()
+        console.log('handle initial event')
         if(event.key === 'Enter'){
           props.submit(event)
         }
@@ -14,7 +15,7 @@ const Footer = props => {
     if (props.isAvailable) {
         return (
             <footer>
-                <input type="number" pattern="[0-9]*" inputMode="numeric" min={1} max={55} defaultValue={props.page}
+                <input type="number" min={1} max={55} defaultValue={props.page}
                       onKeyPress={handleKeyPress}/>
                 <div className="slide-container">
                     <ContinuousSlider change={props.change} commit={props.commit} value={props.page}
