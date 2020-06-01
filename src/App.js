@@ -115,7 +115,6 @@ const App = () => {
   };
 
   const handleInput = (event) => {
-    console.log(vh)
     let savedHeight = vh;
     event.preventDefault()
     event.persist()
@@ -136,9 +135,9 @@ const App = () => {
         setLastChapterState(chapter)
         chapterSwitch(value)
         window.scrollTo({top: 0, left: 0});
-        input.blur();
+        setTimeout(()=>{input.blur();},300)
         vh = savedHeight;
-        document.querySelector('section').style.height = vh + 'px'
+        document.querySelector('section').style.height= `${savedHeight}px`
     }
   };
 
