@@ -37,7 +37,7 @@ const App = () => {
   const [ chapter, setChapterState ] = React.useState(chapterNames[0]);
   const [ lastChapter, setLastChapterState ] = React.useState(chapterNames[0]);
   const [ inView, setInViewState ] = React.useState(true);
-  const [showBookPopUp, setShowBookPopUp] = React.useState(true)
+  const [showBookPopUp, setShowBookPopUp] = React.useState(false)
   const [ historyState, setHistoryState ] = React.useState({
     lastPage:1,
     lastSavedPage:1,

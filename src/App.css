@@ -90,7 +90,7 @@ footer {
 }
 
 .location-text p:last-child{
-  opacity:60%;
+  opacity: 0.6;
 }
 
 footer input{
