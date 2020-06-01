@@ -115,6 +115,7 @@ const App = () => {
   };
 
   const handleInput = (event) => {
+    console.log(vh)
     let savedHeight = vh;
     event.preventDefault()
     event.persist()
@@ -137,6 +138,7 @@ const App = () => {
         window.scrollTo({top: 0, left: 0});
         input.blur();
         vh = savedHeight;
+        console.log(vh)
     }
   };
 
