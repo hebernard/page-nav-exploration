@@ -5,7 +5,7 @@ const Footer = props => {
     if (props.isAvailable) {
         return (
             <footer>
-                <form onSubmit={props.submit}>
+                <form onSubmit={props.submit} action="...">
                     <input type="number" pattern="[0-9]*" inputMode="numeric" min={1} max={55} defaultValue={props.page}
                            />
                     <button type="submit" onClick={props.submit}>Test</button>
