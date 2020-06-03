@@ -1,3 +1,8 @@
+/*@font-face {*/
+/*font-family: "SF Pro Text";*/
+/*src: url("");*/
+/*}*/
+
 html, body, .App, section{
   overscroll-behavior: none;
 }
@@ -101,7 +106,7 @@ footer {
 }
 
 .location-text p:last-child{
-  opacity: 0.6;
+  color:#D4D4D4;
 }
 
 footer input{
@@ -176,32 +181,37 @@ footer input:focus {
 
 .slide-container .MuiSlider-root {
     margin: 0 8px;
-    color: #E5E5E5;
+    color: #C7C7C7;
     width: 90%;
     padding: 29px 0px 21px 0px;
 }
 
 .slide-container .MuiSlider-rail{
   opacity: 1;
+  height: 3px;
 }
 
 .slide-container .MuiSlider-thumb{
   color:#003860;
+  width:16px;
+  height:16px;
+  bottom: 14px;
 }
 
 .slide-container .MuiSlider-mark{
   opacity: 1;
-  background-color:#9D9D9D;
-  height: 6px;
-  width: 6px;
-  top: 27px;
+  background-color:white;
+  height: 10px;
+  width: 10px;
+  border: 3px solid #C7C7C7;
+  border-radius: 10px;
+  bottom: 14px;
 }
 
 .history{
   padding:10px 8px;
   background-color:#003860;
   color:white;
-  font-size:14px;
   position:absolute;
   top: 140px;
   border-radius: 8px;
@@ -223,12 +233,14 @@ footer input:focus {
 .history img{
   width:18px;
   height:18px;
-  margin-right: 4px;
+  margin-right: 8px;
 }
 
 .history p{
   margin:0;
   padding-bottom: 2px;
+  font-size:14px;
+  font-weight: 600;
 }
 
 .history.left:before{
@@ -360,6 +372,7 @@ footer input:focus {
 
 .page-row li{
   margin-right: 2px;
+  padding:1px;
   border-radius: 2px;
   border: 1px solid transparent;
   height: 16px;
@@ -367,7 +380,15 @@ footer input:focus {
 }
 
 .page-row li.active{
-  border: 2px solid white;
+  border: 1px solid white;
+}
+
+.page-row li img{
+  opacity:0.6;
+}
+
+.page-row li.active img{
+  opacity:1;
 }
 
 

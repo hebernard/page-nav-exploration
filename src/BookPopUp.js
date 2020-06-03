@@ -6,7 +6,7 @@ import bookmarkSvg from './images/bookmark.svg';
 
 const BookPopUp = props => {
   const arrowLeft = (props.page * 5.8);
-  const rowLeft = -(props.page * 12);
+  const rowLeft = -(props.page * 14);
   const pageList = [];
   for(var i = 1; i < 56; i++){
      let image;
