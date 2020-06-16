@@ -68,6 +68,7 @@ const App = () => {
     let textInput = document.querySelector('input[type="number"]')
     textInput.value = page
     setShowBookPopUp(false)
+    document.querySelector('.MuiSlider-mark').classList.add('mark-active')
   };
 
   const chapterSwitch = (page) => {

@@ -199,20 +199,24 @@ footer input:focus {
 }
 
 .slide-container .MuiSlider-mark{
-  opacity: 1;
   background-color:white;
-  height: 13px;
-  width: 13px;
-  border: 2px solid #C7C7C7;
+  height: 18px;
+  width: 18px;
+  /*border: 2px solid #C7C7C7;*/
   border-radius: 10px;
   bottom: 13px;
+  opacity: 0;
 }
 
 .slide-container .MuiSlider-mark:after{
-  content:url('images/clock-hands.svg');
+  content:url('images/history.svg');
   position: absolute;
-  top: -3.5px;
-  left: 5px;
+  top:0;
+  left:0;
+}
+
+.slide-container .MuiSlider-mark.mark-active{
+  opacity:1;
 }
 
 .history{
@@ -279,10 +283,12 @@ footer input:focus {
 
 .history.left{
   left:20px;
+  padding-right: 14px;
 }
 
 .history.right{
   right:20px;
+  padding-left: 14px;
 }
 
 
