@@ -201,11 +201,18 @@ footer input:focus {
 .slide-container .MuiSlider-mark{
   opacity: 1;
   background-color:white;
-  height: 10px;
-  width: 10px;
-  border: 3px solid #C7C7C7;
+  height: 13px;
+  width: 13px;
+  border: 2px solid #C7C7C7;
   border-radius: 10px;
-  bottom: 14px;
+  bottom: 13px;
+}
+
+.slide-container .MuiSlider-mark:after{
+  content:url('images/clock-hands.svg');
+  position: absolute;
+  top: -3.5px;
+  left: 5px;
 }
 
 .history{
@@ -227,13 +234,13 @@ footer input:focus {
   width: 0;
   height: 0;
   position: absolute;
-  top:9px;
 }
 
 .history img{
   width:18px;
   height:18px;
   margin-right: 8px;
+  z-index: 100;
 }
 
 .history p{
@@ -241,28 +248,41 @@ footer input:focus {
   padding-bottom: 2px;
   font-size:14px;
   font-weight: 600;
+  z-index: 100;
 }
 
 .history.left:before{
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right:10px solid #003860;
-  left:-9px;
+  width: 26px;
+  height: 26px;
+  background: #003860;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border-radius: 2px;
+  /*border-top: 18px solid transparent;*/
+  /*border-bottom: 18px solid transparent;*/
+  /*border-right: 18px solid #003860;*/
+  left: -9px;
 }
 
 .history.right:before{
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid #003860;
+  width: 26px;
+  height: 26px;
+  background: #003860;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border-radius: 2px;
+  /*border-top: 18px solid transparent;*/
+  /*border-bottom: 18px solid transparent;*/
+  /*border-left: 18px solid #003860;*/
   right:-9px;
 }
 
 .history.left{
-  left:12px;
+  left:20px;
 }
 
 .history.right{
-  right:12px;
+  right:20px;
 }
 
 
@@ -270,14 +290,14 @@ footer input:focus {
   left: -90px;
 }
 .history.left.history-enter-active {
-  left: 12px;
+  left: 20px;
   transition: all 200ms ease;
 }
 .history.left.history-enter-done{
-  left:12px;
+  left:20px;
 }
 .history.left.history-exit {
-  left: 12px;
+  left: 20px;
 }
 .history.left.history-exit-active {
   left: -90px;
@@ -293,14 +313,14 @@ footer input:focus {
   right: -98px;
 }
 .history.right.history-enter-active {
-  right:12px;
+  right:20px;
   transition: all 200ms ease;
 }
 .history.right.history-enter-done{
-  right:12px;
+  right:20px;
 }
 .history.right.history-exit {
-  right: 12px;
+  right: 20px;
 }
 .history.right.history-exit-active {
   right: -98px;
