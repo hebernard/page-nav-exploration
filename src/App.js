@@ -68,7 +68,7 @@ const App = () => {
     let textInput = document.querySelector('input[type="number"]')
     textInput.value = page
     setShowBookPopUp(false)
-    document.querySelector('.MuiSlider-mark').classList.add('mark-active')
+    document.querySelector('.MuiSlider-mark').style.opacity = '1'
   };
 
   const chapterSwitch = (page) => {
@@ -139,10 +139,11 @@ const App = () => {
         setTimeout(()=>{
             input.blur();
             document.querySelector('section').style.height= `${savedHeight}px`
-            console.log(savedHeight)
         },300)
         vh = savedHeight;
     }
+    setTimeout(()=>{document.querySelector('.MuiSlider-mark').style.opacity = '1'},100)
+    console.log('mark active')
   };
 
   const handleTimout = (event) => {

@@ -102,7 +102,7 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 270px;
+  width: 250px;
 }
 
 .location-text p:last-child{
@@ -213,10 +213,6 @@ footer input:focus {
   position: absolute;
   top:0;
   left:0;
-}
-
-.slide-container .MuiSlider-mark.mark-active{
-  opacity:1;
 }
 
 .history{
